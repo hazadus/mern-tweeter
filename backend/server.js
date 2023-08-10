@@ -1,8 +1,9 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import twatRoutes from "./routes/twats.js";
 
-const express = require("express");
-const mongoose = require("mongoose");
-const twatRoutes = require("./routes/twats");
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8000;

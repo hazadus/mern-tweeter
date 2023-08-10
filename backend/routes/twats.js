@@ -1,4 +1,6 @@
-const express = require("express");
+import express from "express";
+import { TwatValidationSchema } from "../models/validation.js";
+import twatModel from "../models/twatModel.js";
 
 const router = express.Router();
 
@@ -13,9 +15,24 @@ router.get("/:id", (req, res) => {
 });
 
 // POST a new twat
-router.post("/", (req, res) => {
-  console.log(req.body);
-  res.json({ message: "POST a new twat" });
+router.post("/", async (req, res) => {
+  const body = req.body;
+
+  // Validate
+  let { error } = TwatValidationSchema.validate(body);
+  if (error) {
+    console.log("🚨 Error validating twat:", error.message);
+    res.status(400).json({ message: error.message.replace(/"/g, "") });
+  }
+
+  // Create new DB document
+  try {
+    const twat = await twatModel.create(body);
+    res.status(200).json(twat);
+  } catch (error) {
+    console.log("🚨 Error saving twat to DB:", error.message);
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // DELETE a single twat
@@ -28,4 +45,4 @@ router.patch("/:id", (req, res) => {
   res.json({ message: "UPDATE (PATCH) a single twat" });
 });
 
-module.exports = router;
+export default router;

@@ -17,3 +17,5 @@ npm run dev
 
 - `nodemon`
 - `dotenv` - load env vars from `.env` files
+- `mongoose`
+- `joi`
