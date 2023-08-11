@@ -27,3 +27,8 @@ npm run dev
 - `nodemon`
 - `dotenv` – load env vars from `.env` files.
 - `joi` – data validation.
+
+## References
+
+- [React CORS Guide: What It Is and How to Enable It](https://www.stackhawk.com/blog/react-cors-guide-what-it-is-and-how-to-enable-it/)
+- [TypeScript and React: Components](https://fettblog.eu/typescript-react/components/)

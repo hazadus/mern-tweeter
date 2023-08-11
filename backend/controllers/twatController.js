@@ -8,6 +8,8 @@ import { TwatValidationSchema } from "../models/validation.js";
  * @param {*} res
  */
 export const getAllTwats = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   try {
     const allTwats = await twatModel.find({}).sort({ createdAt: -1 });
     res.status(200).json(allTwats);
@@ -23,6 +25,8 @@ export const getAllTwats = async (req, res) => {
  * @param {*} res
  */
 export const getTwat = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -46,6 +50,8 @@ export const getTwat = async (req, res) => {
  * @returns
  */
 export const createTwat = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   const body = req.body;
 
   // Validate
@@ -71,6 +77,8 @@ export const createTwat = async (req, res) => {
  * @param {*} res
  */
 export const deleteTwat = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -94,6 +102,8 @@ export const deleteTwat = async (req, res) => {
  * @returns
  */
 export const updateTwat = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   const { id } = req.params;
   const body = req.body;
 
