@@ -1,5 +1,5 @@
-import express from "express";
-import { getAllTwats, getTwat, createTwat } from "../controllers/twatController.js";
+import express, { urlencoded } from "express";
+import { getAllTwats, getTwat, createTwat, deleteTwat, updateTwat } from "../controllers/twatController.js";
 
 const router = express.Router();
 
@@ -13,13 +13,9 @@ router.get("/:id", getTwat);
 router.post("/", createTwat);
 
 // DELETE a single twat
-router.delete("/:id", (req, res) => {
-  res.json({ message: "DELETE a single twat" });
-});
+router.delete("/:id", deleteTwat);
 
 // UPDATE a single twat
-router.patch("/:id", (req, res) => {
-  res.json({ message: "UPDATE (PATCH) a single twat" });
-});
+router.patch("/:id", updateTwat);
 
 export default router;

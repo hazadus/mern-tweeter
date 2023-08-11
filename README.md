@@ -1,4 +1,4 @@
-# MERN-Twatter
+# MERN-Tweeter
 
 A project to learn Express.js and brush up React skills.
 

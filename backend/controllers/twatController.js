@@ -64,3 +64,56 @@ export const createTwat = async (req, res) => {
     res.status(500).json({ error: error.message.replace(/"/g, "") });
   }
 };
+
+/**
+ * Delete a single Twat document from DB by id.
+ * @param {*} req
+ * @param {*} res
+ */
+export const deleteTwat = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: `ID ${id} is not valid ObjectId.` });
+  }
+
+  try {
+    const twat = await twatModel.findOneAndDelete({ _id: id });
+    if (!twat) return res.status(404).json({ error: `Twat with ID ${id} not found!` });
+    res.status(200).json(twat);
+  } catch (error) {
+    console.log(`🚨 Error deleting twat with ID ${id} from DB:`, error.message);
+    return res.status(500).json({ error: error.message.replace(/"/g, "") });
+  }
+};
+
+/**
+ * Update a single Twat document in DB by id.
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
+export const updateTwat = async (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: `ID ${id} is not valid ObjectId.` });
+  }
+
+  // Validate the body
+  let { error } = TwatValidationSchema.validate(body);
+  if (error) {
+    console.log("🚨 Error validating twat:", error.message);
+    return res.status(400).json({ error: error.message.replace(/"/g, "") });
+  }
+
+  try {
+    const twat = await twatModel.findByIdAndUpdate(id, body, { new: true });
+    if (!twat) return res.status(404).json({ error: `Twat with ID ${id} not found!` });
+    res.status(200).json(twat);
+  } catch (error) {
+    console.log(`🚨 Error updating twat with ID ${id} from DB:`, error.message);
+    return res.status(500).json({ error: error.message.replace(/"/g, "") });
+  }
+};
