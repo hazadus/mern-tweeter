@@ -1,5 +1,12 @@
-import express, { urlencoded } from "express";
-import { getAllTwats, getTwat, createTwat, deleteTwat, updateTwat } from "../controllers/twatController.js";
+import express from "express";
+import {
+  getAllTwats,
+  getTwat,
+  createTwat,
+  deleteTwat,
+  updateTwat,
+  options,
+} from "../controllers/twatController.js";
 
 const router = express.Router();
 
@@ -18,6 +25,7 @@ router.delete("/:id", deleteTwat);
 // UPDATE a single twat
 router.patch("/:id", updateTwat);
 
-router.options("/", (req, res) => {});
+// OPTIONS - handle CORS stuff
+router.options("/", options);
 
 export default router;

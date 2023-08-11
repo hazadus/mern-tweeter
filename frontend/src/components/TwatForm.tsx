@@ -2,8 +2,8 @@ import { FormEvent, useState } from "react";
 import { ITwat } from "../types";
 
 const TwatForm = () => {
-  const [username, setUsername] = useState<string>("");
-  const [body, setBody] = useState<string>("");
+  const [username, setUsername] = useState<string>("hazadus");
+  const [body, setBody] = useState<string>("New twat from frontend!");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -16,7 +16,6 @@ const TwatForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors",
     });
   };
 

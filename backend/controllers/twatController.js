@@ -50,10 +50,6 @@ export const getTwat = async (req, res) => {
  * @returns
  */
 export const createTwat = async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-
-  //Access-Control-Allow-Methods: POST, GET, OPTIONS
   const body = req.body;
 
   // Validate
@@ -79,8 +75,6 @@ export const createTwat = async (req, res) => {
  * @param {*} res
  */
 export const deleteTwat = async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -104,8 +98,6 @@ export const deleteTwat = async (req, res) => {
  * @returns
  */
 export const updateTwat = async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-
   const { id } = req.params;
   const body = req.body;
 
@@ -128,4 +120,19 @@ export const updateTwat = async (req, res) => {
     console.log(`🚨 Error updating twat with ID ${id} from DB:`, error.message);
     return res.status(500).json({ error: error.message.replace(/"/g, "") });
   }
+};
+
+/**
+ * Handle CORS
+ * Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#examples_of_access_control_scenarios
+ * @param {*} req
+ * @param {*} res
+ */
+export const options = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PATCH, DELETE");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Max-Age", "86400");
+
+  res.status(204).end();
 };

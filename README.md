@@ -31,5 +31,6 @@ npm run dev
 
 ## References
 
+- [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 - [React CORS Guide: What It Is and How to Enable It](https://www.stackhawk.com/blog/react-cors-guide-what-it-is-and-how-to-enable-it/)
 - [TypeScript and React: Components](https://fettblog.eu/typescript-react/components/)
