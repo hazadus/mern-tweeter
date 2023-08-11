@@ -3,11 +3,12 @@ import express from "express";
 import mongoose from "mongoose";
 import twatRoutes from "./routes/twats.js";
 
+// Load environment variables from `.env` to `process.env`:
 dotenv.config();
 
-const app = express();
 const port = process.env.PORT || 8000;
 const mongoDBAddress = process.env.MONGO_DB_ADDRESS;
+const app = express();
 
 // Middleware
 app.use(express.json());
@@ -20,8 +21,11 @@ app.use((req, res, next) => {
 app.use("/api/v1/twats", twatRoutes);
 
 // Establish DB connection
+// `serverSelectionTimeoutMS` sets timeout for connection and queries.
 mongoose
-  .connect(mongoDBAddress)
+  .connect(mongoDBAddress, {
+    serverSelectionTimeoutMS: 5000,
+  })
   .then(() => {
     console.log("🔌 Connected to MongoDB at", mongoDBAddress);
 
