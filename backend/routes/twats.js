@@ -18,4 +18,6 @@ router.delete("/:id", deleteTwat);
 // UPDATE a single twat
 router.patch("/:id", updateTwat);
 
+router.options("/", (req, res) => {});
+
 export default router;

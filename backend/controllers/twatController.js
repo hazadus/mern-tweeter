@@ -51,7 +51,9 @@ export const getTwat = async (req, res) => {
  */
 export const createTwat = async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 
+  //Access-Control-Allow-Methods: POST, GET, OPTIONS
   const body = req.body;
 
   // Validate

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ITwat } from "../types";
 import TwatCard from "../components/TwatCard";
+import TwatForm from "../components/TwatForm";
 
 const Feed = () => {
   const [twats, setTwats] = useState<ITwat[] | null>(null);
@@ -22,13 +23,9 @@ const Feed = () => {
     <div>
       <h2>Feed</h2>
       <div className="feed">
+        <div>{twats && twats.map((twat) => <TwatCard key={twat._id} twat={twat} />)}</div>
         <div>
-          {twats &&
-            twats.map((twat) => (
-              <>
-                <TwatCard key={twat._id} twat={twat} />
-              </>
-            ))}
+          <TwatForm />
         </div>
       </div>
     </div>

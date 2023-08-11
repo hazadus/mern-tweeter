@@ -6,6 +6,7 @@ A project to learn Express.js and brush up React skills.
 
 - API built using Express.js.
 - All data is stored in self-hosted MongoDB instance.
+- Frontend React app built with Vite and TypeScript.
 
 ## Notes
 
