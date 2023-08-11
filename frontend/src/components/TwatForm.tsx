@@ -4,9 +4,11 @@ import { ITwat } from "../types";
 const TwatForm = () => {
   const [username, setUsername] = useState<string>("hazadus");
   const [body, setBody] = useState<string>("New twat from frontend!");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setError(null);
 
     const newTwat: Partial<ITwat> = { username, body };
 
@@ -17,20 +19,25 @@ const TwatForm = () => {
         "Content-Type": "application/json",
       },
     });
+
+    const json = await response.json();
+
+    if (!response.ok) setError(json.error);
+    else {
+      setUsername("");
+      setBody("");
+    }
   };
 
   return (
     <>
       <form className="createTwat" onSubmit={handleSubmit}>
         <h3>Make a new twat!</h3>
-        <div>
-          <label>Username:</label>
-          <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} />
-        </div>
-        <div>
-          <label>Twat:</label>
-          <input type="text" onChange={(e) => setBody(e.target.value)} value={body} />
-        </div>
+        <label>Username:</label>
+        <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} />
+        <label>Twat:</label>
+        <input type="text" onChange={(e) => setBody(e.target.value)} value={body} />
+        {error && <div className="error">{error}</div>}
         <button>Twat!</button>
       </form>
     </>

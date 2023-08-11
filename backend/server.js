@@ -13,7 +13,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use((req, res, next) => {
+  // Handle CORS
+  res.set("Access-Control-Allow-Origin", "*");
+  // Log the request
   console.log(new Date(), "⚡️", req.path, req.method);
+  // Pass to next middleware
   next();
 });
 

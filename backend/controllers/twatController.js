@@ -8,8 +8,6 @@ import { TwatValidationSchema } from "../models/validation.js";
  * @param {*} res
  */
 export const getAllTwats = async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-
   try {
     const allTwats = await twatModel.find({}).sort({ createdAt: -1 });
     res.status(200).json(allTwats);
@@ -25,8 +23,6 @@ export const getAllTwats = async (req, res) => {
  * @param {*} res
  */
 export const getTwat = async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
