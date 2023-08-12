@@ -8,6 +8,7 @@ interface ITwatsState {
 enum TwatsActionType {
   GET_ALL = "SET",
   CREATE = "CREATE",
+  DELETE = "DELETE",
 }
 
 interface ITwatsAction {
@@ -33,6 +34,10 @@ export const twatsReducer = (state: ITwatsState, action: ITwatsAction): ITwatsSt
     case "CREATE":
       return {
         twats: [action.single, ...state.twats],
+      };
+    case "DELETE":
+      return {
+        twats: state.twats.filter((twat) => twat._id != action.single._id),
       };
     default:
       return state;

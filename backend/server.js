@@ -15,6 +15,9 @@ app.use(express.json());
 app.use((req, res, next) => {
   // Handle CORS
   res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PATCH, DELETE");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Max-Age", "86400");
   // Log the request
   console.log(new Date(), "⚡️", req.path, req.method);
   // Pass to next middleware
