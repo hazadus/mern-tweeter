@@ -30,6 +30,7 @@ npm run dev
 - `nodemon`
 - `dotenv` – load env vars from `.env` files.
 - `joi` – data validation.
+- [date-fns](https://date-fns.org) – provides the most comprehensive, yet simple and consistent toolset for manipulating JavaScript dates in a browser & Node.js.
 
 ## References
 

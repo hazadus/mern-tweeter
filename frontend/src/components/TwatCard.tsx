@@ -1,5 +1,6 @@
 import { ITwat } from "../types";
 import { useTwatsContext } from "../hooks/useTwatsContext";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 type TwatCardProps = {
   twat: ITwat;
@@ -26,7 +27,7 @@ const TwatCard = ({ twat }: TwatCardProps) => {
       <div className="twat-card">
         <h4>{twat.username}</h4>
         <p>{twat.body}</p>
-        <small>{twat.createdAt.toString()}</small>
+        <small>{formatDistanceToNow(new Date(twat.createdAt), { addSuffix: true })}</small>
         <span onClick={handleDelete}>delete</span>
       </div>
     </>
