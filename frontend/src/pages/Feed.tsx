@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useTwatsContext } from "../hooks/useTwatsContext";
 import { ITwat } from "../types";
 import TwatCard from "../components/TwatCard";
 import TwatForm from "../components/TwatForm";
 
 const Feed = () => {
-  const [twats, setTwats] = useState<ITwat[] | null>(null);
+  // Get twats list and dispatch function from global state
+  // @ts-ignore
+  const { twats, dispatch } = useTwatsContext();
 
   useEffect(() => {
     const fetchAllTwats = async () => {
@@ -12,7 +15,8 @@ const Feed = () => {
       const json = (await response.json()) as ITwat[];
 
       if (response.ok) {
-        setTwats(json);
+        // Save server response (list of Twats) in global state
+        dispatch({ type: "SET", multiple: json });
       }
     };
 
@@ -23,7 +27,7 @@ const Feed = () => {
     <div>
       <h2>Feed</h2>
       <div className="feed">
-        <div>{twats && twats.map((twat) => <TwatCard key={twat._id} twat={twat} />)}</div>
+        <div>{twats && twats.map((twat: ITwat) => <TwatCard key={twat._id} twat={twat} />)}</div>
         <div>
           <TwatForm />
         </div>

@@ -1,10 +1,14 @@
 import { FormEvent, useState } from "react";
+import { useTwatsContext } from "../hooks/useTwatsContext";
 import { ITwat } from "../types";
 
 const TwatForm = () => {
-  const [username, setUsername] = useState<string>("hazadus");
-  const [body, setBody] = useState<string>("New twat from frontend!");
+  const [username, setUsername] = useState<string>("");
+  const [body, setBody] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+
+  // @ts-ignore
+  const { dispatch } = useTwatsContext();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -26,6 +30,7 @@ const TwatForm = () => {
     else {
       setUsername("");
       setBody("");
+      dispatch({ type: "CREATE", single: json });
     }
   };
 
